@@ -2,6 +2,7 @@ package io.albrains.security.authserver.config.security
 
 import io.albrains.security.authserver.service.UserApp
 import io.jsonwebtoken.*
+import io.jsonwebtoken.security.SecurityException
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -35,7 +36,7 @@ class TokenProvider(
             logger.trace(INVALID_JWT_TOKEN, e);
         } catch (e: MalformedJwtException) {
             logger.trace(INVALID_JWT_TOKEN, e);
-        } catch (e: SignatureException) {
+        } catch (e: SecurityException) {
             logger.trace(INVALID_JWT_TOKEN, e);
         } catch (e: IllegalArgumentException ) { // TODO: should we let it bubble (no catch), to avoid defensive programming and follow the fail-fast principle?
             logger.error("Token validation error ${e.message}", e);
