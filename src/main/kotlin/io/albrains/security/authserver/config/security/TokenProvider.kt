@@ -31,15 +31,15 @@ class TokenProvider(
             jwtParser.parseClaimsJws(jwt)
             return true
         } catch(e: ExpiredJwtException) {
-            logger.trace(INVALID_JWT_TOKEN, e);
+            logger.trace(INVALID_JWT_TOKEN, e)
         } catch (e: UnsupportedJwtException) {
-            logger.trace(INVALID_JWT_TOKEN, e);
+            logger.trace(INVALID_JWT_TOKEN, e)
         } catch (e: MalformedJwtException) {
-            logger.trace(INVALID_JWT_TOKEN, e);
+            logger.trace(INVALID_JWT_TOKEN, e)
         } catch (e: SecurityException) {
-            logger.trace(INVALID_JWT_TOKEN, e);
+            logger.trace(INVALID_JWT_TOKEN, e)
         } catch (e: IllegalArgumentException ) { // TODO: should we let it bubble (no catch), to avoid defensive programming and follow the fail-fast principle?
-            logger.error("Token validation error ${e.message}", e);
+            logger.error("Token validation error ${e.message}", e)
         }
 
         return false
