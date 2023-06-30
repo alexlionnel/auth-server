@@ -12,7 +12,8 @@ import reactor.core.publisher.Mono
 class JWTFilter(private val tokenProvider: TokenProvider) : WebFilter {
 
     companion object {
-        const val AUTHORIZATION_HEADER = "Authorization"
+        private const val AUTHORIZATION_HEADER = "Authorization"
+        private const val BEARER = "Bearer "
     }
 
     override fun filter(exchange: ServerWebExchange, chain: WebFilterChain): Mono<Void> {
@@ -27,8 +28,8 @@ class JWTFilter(private val tokenProvider: TokenProvider) : WebFilter {
 
     private fun resolveToken(request: ServerHttpRequest): String? {
         val bearerToken = request.headers.getFirst(AUTHORIZATION_HEADER)
-        return if (StringUtils.hasText(bearerToken) && bearerToken!!.startsWith("Bearer ")) {
-            bearerToken.substring(7)
+        return if (StringUtils.hasText(bearerToken) && bearerToken!!.startsWith(BEARER)) {
+            bearerToken.substring(BEARER.length)
         } else null
     }
 }
