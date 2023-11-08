@@ -68,6 +68,7 @@ class TokenProvider(
             .addClaims(mapOf())
             .signWith(privateKey, SignatureAlgorithm.RS256)
             .setExpiration(tokenExpirationDate())
+            .setIssuedAt(Date())
             //.serializeToJsonWith(JacksonSerializer<Any?>())
             .compact()
     }

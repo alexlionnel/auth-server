@@ -58,7 +58,7 @@ class SecurityConfig(private val tokenProvider: TokenProvider) {
                     .frameOptions().disable()
             .and()
                 .addFilterAt(JWTFilter(tokenProvider), SecurityWebFiltersOrder.AUTHENTICATION)
-            .build();
+            .build()
     }
 
     @Bean
